@@ -26,148 +26,48 @@ function gotPoses(results)
     {
         console.log(results);
         scoreofleftWrist = results[0].pose.keypoints[9].score;
-        console.log("Score of left wrist is ="+scoreofleftWrist+"Score of right wrist is ="+scoreofrightWrist);
        leftWristX = results[0].pose.leftWrist.x;
        leftWristY = results[0].pose.leftWrist.y;
        console.log("leftWristX = " +leftWristX+ "leftWristY = "+leftWristY);
+       scoreofrightWrist = results[0].pose.keypoints[10].score;
        rightWristX = results[0].pose.rightWrist.x;
        rightWristY = results[0].pose.rightWrist.y;
        console.log("rightWristX = " +rightWristX+ "rightWristY = "+rightWristY);
-
-       scoreofrightWrist = results[0].pose.keypoints[10].score;
-
     }
-    
-    
     
 }
 function preload()
 {
     song = loadSound("music.mp3");
-    believer= loadSound("Believer.mp3");
+    believer= loadSound("music2.mp3");
 }
 
 function draw()
 {
     image(video, 0,0, 400, 350);
-    fill("#ff0000");
-    stroke("#800080");
-    if(scoreofrightWrist > 0.2)
-    {
-
-    
-    circle(rightWristX, rightWristY, 21);
-    
-    if(rightWristY >0 && rightWristY <=100)
-    {
-        document.getElementById("speed").innerHTML = "Speed rate is 0.5x";
-       
-        if( name == "music")
-    {
-        song.rate(0.5);
-    }
-    else if( name == "Believer")
-    {
-        believer.rate(0.5);
-    }
-    }
-
-    else if(rightWristY >100 && rightWristY <= 200)
-    {
-        document.getElementById("speed").innerHTML = "Speed rate is 1x";
-        
-
-        if( name == "music")
-        {
-            song.rate(1);
-        }
-        else if( name == "Believer")
-        {
-            believer.rate(1);
-        }
-    }
-
-
-    else if( rightWristY >200 && rightWristY <= 300)
-    {
-        document.getElementById("speed").innerHTML = "Speed rate is 1.5x";
-        if( name == "music")
-        {
-            song.rate(1.5);
-        }
-        else if( name == "Believer")
-        {
-            believer.rate(1.5);
-        }
-    }
-
-    else if(rightWristY >300 && rightWristY <= 400)
-    {
-        document.getElementById("speed").innerHTML = "Speed rate is 2x";
-        if( name == "music")
-        {
-            song.rate(2);
-        }
-        else if( name == "Believer")
-        {
-            believer.rate(2);
-        }
-    }
-
-    else if(rightWristY >400 && rightWristY <= 500)
-    {
-        document.getElementById("speed").innerHTML = "Speed is 2.5x";
-        if( name == "music")
-        {
-            song.rate(2.5);
-        }
-        else if( name == "Believer")
-        {
-            believer.rate(2.5);
-        }
-    }
-    }
-}
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     if(scoreofleftWrist > 0.2)
    { 
     fill("#ff0000");
     stroke("#800080");
     circle(leftWristX, leftWristY, 21);
-    InnumberleftWristY =  Number(leftWristY);
-    remove_decimals = floor(InnumberleftWristY);
-    InnumberleftWristY_divide_1000 = remove_decimals / 1000;
-    volume = InnumberleftWristY_divide_1000 * 2;
-    document.getElementById("volume").innerHTML = "Volume : " +volume;
+   song.play();
+   believer.stop();
+   document.getElementById("song-name") = " Harry Potter";
 
-    if( name == "music")
-    {
-        song.setVolume(volume);
-    }
-    else if( name == "Believer")
-    {
-        believer.setVolume(volume);
-    }
-        }
+   }
 
+else if(scoreofrightWrist > 0.2)
+{
+    fill("#ff0000");
+    stroke("#800080");
+    circle(rightWristX, rightWristY, 21);
+    believer.play();
+    song.stop();
+    document.getElementById("song-name") = " Peter Pan";
+    
+}
 
-
+}
 
 function play()
 {
